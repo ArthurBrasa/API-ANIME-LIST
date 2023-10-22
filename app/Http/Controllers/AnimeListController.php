@@ -12,6 +12,23 @@ class AnimeListController extends Controller
      *
      * @return void
      */
+
+    /**
+     * 
+     * @OA\Get(
+     *     path="/api/v1/",
+     *     tags={"Animes"},
+     *     summary="Lista de Animes",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Lista de Animes",
+     *         @OA\JsonContent(type="array", @OA\Items(type="string"))
+     *     ),
+     * )
+     */
+
+
+    
     private static $lista = [
         'naruto' => 'Um jovem ninja busca se tornar o Hokage e proteger sua vila.',
         'bleach' => 'Um adolescente adquire poderes de um Shinigami e luta contra espíritos malignos.',
@@ -88,14 +105,6 @@ class AnimeListController extends Controller
         'gintama' => 'Gintoki é um samurai preguiçoso em uma era de alienígenas.',
         'detective_conan' => 'Shinichi Kudo se torna um detetive após ser transformado em criança.',
     ];
-    
-    
-
-    public function __construct()
-    {
-        //
-    }
-
     public function index(Request $request)
     {
 
@@ -123,6 +132,49 @@ class AnimeListController extends Controller
         return response()->json($pagedData);
     }
 
+    /**
+ * @OA\Get(
+ *     path="/api/v1/{title}",
+ *     tags={"Animes"},
+ *     summary="Obter informações sobre um anime por título",
+ *     @OA\Parameter(
+ *         name="title",
+ *         in="path",
+ *         required=true,
+ *         description="Título do anime desejado",
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Informações sobre o anime",
+ *         @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(property="title", type="string", description="Título do anime"),
+ *             @OA\Property(property="description", type="string", description="Descrição do anime"),
+ *             @OA\Property(
+ *                 property="links",
+ *                 type="object",
+ *                 @OA\Property(property="self", type="string", description="URL para esta rota"),
+ *                 @OA\Property(property="all_animes", type="string", description="URL para listar todos os animes")
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Anime não encontrado",
+ *         @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(property="error", type="string", description="Mensagem de erro"),
+ *             @OA\Property(
+ *                 property="links",
+ *                 type="object",
+ *                 @OA\Property(property="self", type="string", description="URL para esta rota"),
+ *                 @OA\Property(property="all_animes", type="string", description="URL para listar todos os animes")
+ *             )
+ *         )
+ *     )
+ * )
+ */
     public function list(Request $request)
     {
         # pegar parametro no path /api/v1/{title}

@@ -12,6 +12,7 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
+$router->get('/', ['uses' => 'APIController@index', 'as' => 'home']);
 
 $router->group(['prefix' => 'api'], function  () use ($router) {
 

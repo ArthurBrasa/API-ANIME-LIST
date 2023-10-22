@@ -1,0 +1,125 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My First API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "operationId": "8cb38a1daa0f7420e421e4a05e4de8c0",
+                "responses": {
+                    "200": {
+                        "description": "Pagina Inicial"
+                    }
+                }
+            }
+        },
+        "/api/v1/": {
+            "get": {
+                "tags": [
+                    "Animes"
+                ],
+                "summary": "Lista de Animes",
+                "responses": {
+                    "200": {
+                        "description": "Lista de Animes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/{title}": {
+            "get": {
+                "tags": [
+                    "Animes"
+                ],
+                "summary": "Obter informações sobre um anime por título",
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "path",
+                        "description": "Título do anime desejado",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Informações sobre o anime",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "title": {
+                                            "description": "Título do anime",
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "description": "Descrição do anime",
+                                            "type": "string"
+                                        },
+                                        "links": {
+                                            "properties": {
+                                                "self": {
+                                                    "description": "URL para esta rota",
+                                                    "type": "string"
+                                                },
+                                                "all_animes": {
+                                                    "description": "URL para listar todos os animes",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Anime não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "Mensagem de erro",
+                                            "type": "string"
+                                        },
+                                        "links": {
+                                            "properties": {
+                                                "self": {
+                                                    "description": "URL para esta rota",
+                                                    "type": "string"
+                                                },
+                                                "all_animes": {
+                                                    "description": "URL para listar todos os animes",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
