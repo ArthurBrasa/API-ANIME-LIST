@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "API",
-        "description": "API para consulta de animes",
+        "description": "API para consulta de animes Token: 1234",
         "contact": {
             "name": "Arthur",
             "email": "arthurbrasa@outlook.com"
