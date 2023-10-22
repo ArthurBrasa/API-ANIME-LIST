@@ -16,7 +16,7 @@ class AnimeListController extends Controller
     /**
      * 
      * @OA\Get(
-     *     path="/api/v1/",
+     *     path="/api/v1/anime",
      *     tags={"Animes"},
      *     summary="Lista de Animes",
      *     @OA\Response(
@@ -134,7 +134,7 @@ class AnimeListController extends Controller
 
     /**
  * @OA\Get(
- *     path="/api/v1/{title}",
+ *     path="/api/v1/anime/{title}",
  *     tags={"Animes"},
  *     summary="Obter informações sobre um anime por título",
  *     @OA\Parameter(

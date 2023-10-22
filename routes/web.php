@@ -25,21 +25,23 @@ $router->get('/api/oauth2-callback', 'AuthController@handleOAuth2Callback');
 
 $router->group(['prefix' => 'api'], function  () use ($router) {
 
+    # Grupo com token
+    $router->group(['middleware' => 'token_authenticate'], function () use ($router) {
+        $router->get('/login', function () use ($router) {
+            return ['status' => "logado"];
+        });
+    });
+
     $router->group(['prefix' => 'v1'], function () use ($router) {
         
 
-        $router->get('/', ['as' => 'all_animes', 'uses' => 'AnimeListController@index']);
-        $router->get('/{title}', ['as' => 'preview', 'uses' => 'AnimeListController@list']);
+        $router->get('/anime', ['as' => 'all_animes', 'uses' => 'AnimeListController@index']);
+        $router->get('/anime/{title}', ['as' => 'preview', 'uses' => 'AnimeListController@list']);
         
         # rota com controller
 
 
-        # Grupo com token
-        $router->group(['middleware' => 'token_authenticate'], function () use ($router) {
-            $router->get('/auth/login', function () use ($router) {
-                return ['status' => "logado"];
-            });
-        });
+        
 
     });
 
