@@ -184,7 +184,7 @@ class AnimeListController extends Controller
     }
  /**
  * @OA\Post(
- *     path="/api/animes",
+ *     path="/api/anime",
  *     summary="Criar um novo anime",
  *     tags={"Animes"},
  *     @OA\RequestBody(
