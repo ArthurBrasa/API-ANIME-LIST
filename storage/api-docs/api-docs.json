@@ -1,7 +1,16 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "My Anime List",
+        "title": "API",
+        "description": "API para consulta de animes",
+        "contact": {
+            "name": "Arthur",
+            "email": "arthurbrasa@outlook.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
         "version": "0.1"
     },
     "paths": {
