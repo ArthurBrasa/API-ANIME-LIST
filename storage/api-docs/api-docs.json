@@ -5,16 +5,6 @@
         "version": "0.1"
     },
     "paths": {
-        "/": {
-            "get": {
-                "operationId": "8cb38a1daa0f7420e421e4a05e4de8c0",
-                "responses": {
-                    "200": {
-                        "description": "Pagina Inicial"
-                    }
-                }
-            }
-        },
         "/api/v1/": {
             "get": {
                 "tags": [
