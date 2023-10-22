@@ -25,19 +25,5 @@ class Anime extends Model implements AuthenticatableContract, AuthorizableContra
         'release_date',
         'image_url'
     ];
-
-    public function toArray()
-    {
-        $data = parent::toArray();
-
-        // Verifique se a resposta é uma instância de LengthAwarePaginator (paginação)
-        if ($this instanceof LengthAwarePaginator) {
-            unset($data['links']); // Remove a chave "links" da resposta de paginação
-        }
-
-        return $data;
-    }
-
-
     
 }
