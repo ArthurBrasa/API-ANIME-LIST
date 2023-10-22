@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('animes', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 100)->nullable(false);
+            $table->string('title', 100)->nullable(false)->unique();
             $table->text('synopsis')->nullable(false);
             $table->date('release_date')->nullable(false);
             $table->string('image_url', 300)->nullable(true);

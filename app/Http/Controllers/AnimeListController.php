@@ -23,7 +23,6 @@ class AnimeListController extends Controller
      *     @OA\Response(
      *         response=200,
      *         description="Lista de Animes",
-     *         @OA\JsonContent(type="array", @OA\Items(type="string"))
      *     ),
      * )
      */
@@ -144,31 +143,10 @@ class AnimeListController extends Controller
  *     @OA\Response(
  *         response=200,
  *         description="Informações sobre o anime",
- *         @OA\JsonContent(
- *             type="object",
- *             @OA\Property(property="title", type="string", description="Título do anime"),
- *             @OA\Property(property="description", type="string", description="Descrição do anime"),
- *             @OA\Property(
- *                 property="links",
- *                 type="object",
- *                 @OA\Property(property="self", type="string", description="URL para esta rota"),
- *                 @OA\Property(property="all_animes", type="string", description="URL para listar todos os animes")
- *             )
- *         )
  *     ),
  *     @OA\Response(
  *         response=404,
  *         description="Anime não encontrado",
- *         @OA\JsonContent(
- *             type="object",
- *             @OA\Property(property="error", type="string", description="Mensagem de erro"),
- *             @OA\Property(
- *                 property="links",
- *                 type="object",
- *                 @OA\Property(property="self", type="string", description="URL para esta rota"),
- *                 @OA\Property(property="all_animes", type="string", description="URL para listar todos os animes")
- *             )
- *         )
  *     )
  * )
  */
@@ -204,4 +182,57 @@ class AnimeListController extends Controller
 
 
     }
+ /**
+ * @OA\Post(
+ *     path="/api/animes",
+ *     summary="Criar um novo anime",
+ *     tags={"Animes"},
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             @OA\Property(property="title", type="string", description="Título do anime (máx. 100 caracteres)"),
+ *             @OA\Property(property="synopsis", type="string", description="Sinopse do anime"),
+ *             @OA\Property(property="release_date", type="string", format="date", description="Data de lançamento do anime no formato YYYY-MM-DD"),
+ *             @OA\Property(property="image_url", type="string", description="URL da imagem do anime (opcional, máx. 300 caracteres)")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=201,
+ *         description="Anime criado com sucesso",
+ *        
+ *     ),
+ *     @OA\Response(
+ *         response=400,
+ *         description="Requisição inválida",
+ *     ),
+ *     @OA\Response(
+ *         response=409,
+ *         description="Conflito - Já existe um anime com o mesmo título",
+ *       
+ *     )
+ * )
+ */
+
+public function create(Request $request)
+{
+    # validar dados com validator
+    $this->validate($request, [
+        'title' => 'required|string|max:100',
+        'synopsis' => 'required|string',
+        'release_date' => 'required|date',
+        'image_url' => 'nullable|string|max:300'
+    ]);
+
+    # verificar se já existe um anime com o mesmo título
+    $anime = Anime::where('title', $request->input('title'))->first();
+    if ($anime) {
+        return response()->json([
+            'error' => 'Já existe um anime com este título'
+        ], 409);
+    }
+
+    $anime = Anime::create($request->all());
+    return response()->json($anime, 201);
+}
+
 }   

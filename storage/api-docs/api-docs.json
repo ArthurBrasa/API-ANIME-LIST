@@ -20,19 +20,10 @@
                     "Animes"
                 ],
                 "summary": "Lista de Animes",
+                "operationId": "e41e4460d457ed338b894eef6cff2bdd",
                 "responses": {
                     "200": {
-                        "description": "Lista de Animes",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
+                        "description": "Lista de Animes"
                     }
                 }
             }
@@ -56,66 +47,59 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Informações sobre o anime",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "title": {
-                                            "description": "Título do anime",
-                                            "type": "string"
-                                        },
-                                        "description": {
-                                            "description": "Descrição do anime",
-                                            "type": "string"
-                                        },
-                                        "links": {
-                                            "properties": {
-                                                "self": {
-                                                    "description": "URL para esta rota",
-                                                    "type": "string"
-                                                },
-                                                "all_animes": {
-                                                    "description": "URL para listar todos os animes",
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
+                        "description": "Informações sobre o anime"
                     },
                     "404": {
-                        "description": "Anime não encontrado",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "error": {
-                                            "description": "Mensagem de erro",
-                                            "type": "string"
-                                        },
-                                        "links": {
-                                            "properties": {
-                                                "self": {
-                                                    "description": "URL para esta rota",
-                                                    "type": "string"
-                                                },
-                                                "all_animes": {
-                                                    "description": "URL para listar todos os animes",
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "type": "object"
-                                        }
+                        "description": "Anime não encontrado"
+                    }
+                }
+            }
+        },
+        "/api/animes": {
+            "post": {
+                "tags": [
+                    "Animes"
+                ],
+                "summary": "Criar um novo anime",
+                "operationId": "e933db163277a4d8edb86fac0cf49e6f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "description": "Título do anime (máx. 100 caracteres)",
+                                        "type": "string"
                                     },
-                                    "type": "object"
-                                }
+                                    "synopsis": {
+                                        "description": "Sinopse do anime",
+                                        "type": "string"
+                                    },
+                                    "release_date": {
+                                        "description": "Data de lançamento do anime no formato YYYY-MM-DD",
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "image_url": {
+                                        "description": "URL da imagem do anime (opcional, máx. 300 caracteres)",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
                             }
                         }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Anime criado com sucesso"
+                    },
+                    "400": {
+                        "description": "Requisição inválida"
+                    },
+                    "409": {
+                        "description": "Conflito - Já existe um anime com o mesmo título"
                     }
                 }
             }

@@ -37,7 +37,7 @@ $router->group(['prefix' => 'api'], function  () use ($router) {
 
         $router->get('/anime', ['as' => 'all_animes', 'uses' => 'AnimeListController@index']);
         $router->get('/anime/{title}', ['as' => 'preview', 'uses' => 'AnimeListController@list']);
-        
+        $router->post('/anime', ['as' => 'create', 'uses' => 'AnimeListController@create']);
         # rota com controller
 
 
