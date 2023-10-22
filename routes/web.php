@@ -15,10 +15,12 @@
 $router->get('/api/documentation', function () use ($router) {
     return view('swagger');
 });
+$router->get('/', function () use ($router) {
+    return redirect('/api/documentation');
+});
+
 $router->get('/api/oauth2-callback', 'AuthController@handleOAuth2Callback');
 
-
-$router->get('/', ['uses' => 'APIController@index', 'as' => 'home']);
 
 
 $router->group(['prefix' => 'api'], function  () use ($router) {
