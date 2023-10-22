@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\pagination\CustomLenghtAwarePaginator;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class AnimeListController extends Controller
 {
@@ -121,7 +121,7 @@ class AnimeListController extends Controller
         
         
         # Paginação API
-        $pagedData = new LengthAwarePaginator(
+        $pagedData = new CustomLenghtAwarePaginator(
             array_slice($data, ($page - 1) * $perPage, $perPage),
             count($data),
             $perPage,

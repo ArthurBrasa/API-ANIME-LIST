@@ -75,7 +75,7 @@
         const ui = SwaggerUIBundle({
             dom_id: '#swagger-ui',
 
-            url: "{{ env("SWAGGER_LUME_CONST_HOST") }}",
+            url: "{{ env("SWAGGER_LUME_CONST_HOST") }}", // from const file in .env
             operationsSorter: {!! isset($operationsSorter) ? '"' . $operationsSorter . '"' : 'null' !!},
             configUrl: {!! isset($additionalConfigUrl) ? '"' . $additionalConfigUrl . '"' : 'null' !!},
             validatorUrl: {!! isset($validatorUrl) ? '"' . $validatorUrl . '"' : 'null' !!},
