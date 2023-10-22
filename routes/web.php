@@ -37,9 +37,9 @@ $router->group(['prefix' => 'api'], function  () use ($router) {
 
         $router->get('/anime', ['as' => 'all_animes', 'uses' => 'AnimeListController@index']);
         $router->get('/anime/{title}', ['as' => 'preview', 'uses' => 'AnimeListController@list']);
-        $router->post('/anime', ['as' => 'create', 'uses' => 'AnimeListController@create']);
-        $router->put('/anime/{id}', ['as' => 'update', 'uses' => 'AnimeListController@update']);
-        $router->delete('/anime/{id}', ['as' => 'delete', 'uses' => 'AnimeListController@delete']);
+        $router->post('/anime', ['as' => 'create', 'uses' => 'AnimeListController@create', 'middleware' => 'token_authenticate']);
+        $router->put('/anime/{id}', ['as' => 'update', 'uses' => 'AnimeListController@update', 'middleware' => 'token_authenticate']);
+        $router->delete('/anime/{id}', ['as' => 'delete', 'uses' => 'AnimeListController@delete', 'middleware' => 'token_authenticate']);
         # rota com controller
 
 

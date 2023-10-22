@@ -102,7 +102,8 @@ class AnimeListController extends Controller
 
 
     }
- /**
+/**
+ *
  * @OA\Post(
  *     path="/api/v1/anime",
  *     summary="Criar um novo anime",
@@ -119,7 +120,6 @@ class AnimeListController extends Controller
  *     @OA\Response(
  *         response=201,
  *         description="Anime criado com sucesso",
- *        
  *     ),
  *     @OA\Response(
  *         response=400,
@@ -128,10 +128,13 @@ class AnimeListController extends Controller
  *     @OA\Response(
  *         response=409,
  *         description="Conflito - Já existe um anime com o mesmo título",
- *       
- *     )
+ *     ),
+ *     security={
+ *         {"bearerAuth": {}}
+ *     }
  * )
  */
+
 
     public function create(Request $request)
     {
@@ -154,42 +157,47 @@ class AnimeListController extends Controller
         $anime = Anime::create($request->all());
         return response()->json($anime, 201);
     }
-        /**
-     * @OA\Put(
-     *     path="/api/v1/anime/{id}",
-     *     summary="Atualiza um anime existente",
-     *     tags={"Animes"},
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="ID do anime a ser atualizado",
-     *         required=true,
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\RequestBody(
-     *         description="Dados do anime a ser atualizado",
-     *         required=true,
-     *         @OA\JsonContent(
-     *             @OA\Property(property="title", type="string", description="Título do anime"),
-     *             @OA\Property(property="synopsis", type="string", description="Sinopse do anime"),
-     *             @OA\Property(property="release_date", type="date", description="Data de lançamento no formato YYYY-MM-DD"),
-     *             @OA\Property(property="image_url", type="string", description="URL da imagem do anime"),
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response="202",
-     *         description="Anime atualizado com sucesso",
-     *     ),
-     *     @OA\Response(
-     *         response="404",
-     *         description="Anime não encontrado",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="error", type="string", description="Mensagem de erro")
-     *         )
-     *     )
-     * )
-     */
+       /**
+ *
+ * @OA\Put(
+ *     path="/api/v1/anime/{id}",
+ *     summary="Atualiza um anime existente",
+ *     tags={"Animes"},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="ID do anime a ser atualizado",
+ *         required=true,
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\RequestBody(
+ *         description="Dados do anime a ser atualizado",
+ *         required=true,
+ *         @OA\JsonContent(
+ *             @OA\Property(property="title", type="string", description="Título do anime"),
+ *             @OA\Property(property="synopsis", type="string", description="Sinopse do anime"),
+ *             @OA\Property(property="release_date", type="date", description="Data de lançamento no formato YYYY-MM-DD"),
+ *             @OA\Property(property="image_url", type="string", description="URL da imagem do anime"),
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response="202",
+ *         description="Anime atualizado com sucesso",
+ *     ),
+ *     @OA\Response(
+ *         response="404",
+ *         description="Anime não encontrado",
+ *         @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(property="error", type="string", description="Mensagem de erro")
+ *         )
+ *     ),
+ *     security={
+ *         {"bearerAuth": {}}
+ *     }
+ * )
+ */
+
     public function update(Request $request, int $id)
     {
         # validar dados para id de path
@@ -220,44 +228,48 @@ class AnimeListController extends Controller
         return response()->json($anime, 202);
     }
 
-        /**
-     * @OA\Delete(
-     *     path="/api/v1/anime/{id}",
-     *     summary="Remove um anime pelo ID",
-     *    tags={"Animes"},
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         description="ID do anime a ser removido",
-     *         required=true,
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\Response(
-     *         response="202",
-     *         description="Anime removido com sucesso",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", description="Mensagem de sucesso"),
-     *             @OA\Property(property="data", type="object", description="Dados do anime removido"),
-     *             @OA\Property(property="status", type="string", description="Código de status da resposta"),
-     *             @OA\Property(property="links", type="object", description="Links relacionados"),
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response="404",
-     *         description="Anime não encontrado",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", description="Mensagem de erro")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response="400",
-     *         description="ID inválido",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="error", type="string", description="Mensagem de erro")
-     *         )
-     *     )
-     * )
-     */
+    /**
+ *
+ * @OA\Delete(
+ *     path="/api/v1/anime/{id}",
+ *     summary="Remove um anime pelo ID",
+ *     tags={"Animes"},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         description="ID do anime a ser removido",
+ *         required=true,
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(
+ *         response="202",
+ *         description="Anime removido com sucesso",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", description="Mensagem de sucesso"),
+ *             @OA\Property(property="data", type="object", description="Dados do anime removido"),
+ *             @OA\Property(property="status", type="string", description="Código de status da resposta"),
+ *             @OA\Property(property="links", type="object", description="Links relacionados"),
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response="404",
+ *         description="Anime não encontrado",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="error", type="string", description="Mensagem de erro")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response="400",
+ *         description="ID inválido",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="error", type="string", description="Mensagem de erro")
+ *         )
+ *     ),
+ *     security={
+ *         {"bearerAuth": {}}
+ *     }
+ * )
+ */
 
     public function delete($id)
     {

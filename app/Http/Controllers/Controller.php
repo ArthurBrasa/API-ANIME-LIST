@@ -11,7 +11,7 @@ use Laravel\Lumen\Routing\Controller as BaseController;
  *     @OA\Info(
  *         title="API",
  *         version="0.1",
- *         description="API para consulta de animes",
+ *         description="API para consulta de animes Token: 1234",
  *         @OA\Contact(
  *             name="Arthur",
  *             email="arthurbrasa@outlook.com"
@@ -22,6 +22,14 @@ use Laravel\Lumen\Routing\Controller as BaseController;
  *         )
  *     )
  * )
+ * /**
+ * @OA\SecurityScheme(
+ *     securityScheme="bearerAuth",
+ *     type="http",
+ *     scheme="bearer",
+ *     bearerFormat="JWT",
+ * )
+ *
  */
 
 
