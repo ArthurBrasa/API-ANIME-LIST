@@ -55,13 +55,13 @@
                 }
             }
         },
-        "/api/animes": {
+        "/api/anime": {
             "post": {
                 "tags": [
                     "Animes"
                 ],
                 "summary": "Criar um novo anime",
-                "operationId": "e933db163277a4d8edb86fac0cf49e6f",
+                "operationId": "7e0742afabaf202fe1b908c3492c5712",
                 "requestBody": {
                     "required": true,
                     "content": {
