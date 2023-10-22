@@ -101,6 +101,156 @@
                     }
                 }
             }
+        },
+        "/api/v1/anime/{id}": {
+            "put": {
+                "tags": [
+                    "Animes"
+                ],
+                "summary": "Atualiza um anime existente",
+                "operationId": "3e45dd157f722dfa6c04e6be22c10ec2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do anime a ser atualizado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Dados do anime a ser atualizado",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "description": "Título do anime",
+                                        "type": "string"
+                                    },
+                                    "synopsis": {
+                                        "description": "Sinopse do anime",
+                                        "type": "string"
+                                    },
+                                    "release_date": {
+                                        "description": "Data de lançamento no formato YYYY-MM-DD",
+                                        "type": "date"
+                                    },
+                                    "image_url": {
+                                        "description": "URL da imagem do anime",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Anime atualizado com sucesso"
+                    },
+                    "404": {
+                        "description": "Anime não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "Mensagem de erro",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Animes"
+                ],
+                "summary": "Remove um anime pelo ID",
+                "operationId": "c061a276ce7031c88ed9c4408c786cdb",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do anime a ser removido",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Anime removido com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Mensagem de sucesso",
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "description": "Dados do anime removido",
+                                            "type": "object"
+                                        },
+                                        "status": {
+                                            "description": "Código de status da resposta",
+                                            "type": "string"
+                                        },
+                                        "links": {
+                                            "description": "Links relacionados",
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Anime não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "Mensagem de erro",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ID inválido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "Mensagem de erro",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
