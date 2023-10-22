@@ -26,42 +26,13 @@
                         "description": "Lista de Animes"
                     }
                 }
-            }
-        },
-        "/api/v1/anime/{title}": {
-            "get": {
-                "tags": [
-                    "Animes"
-                ],
-                "summary": "Obter informações sobre um anime por título",
-                "parameters": [
-                    {
-                        "name": "title",
-                        "in": "path",
-                        "description": "Título do anime desejado",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Informações sobre o anime"
-                    },
-                    "404": {
-                        "description": "Anime não encontrado"
-                    }
-                }
-            }
-        },
-        "/api/anime": {
+            },
             "post": {
                 "tags": [
                     "Animes"
                 ],
                 "summary": "Criar um novo anime",
-                "operationId": "7e0742afabaf202fe1b908c3492c5712",
+                "operationId": "93fecc2c1cc26e34a830da70f38275ac",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -100,6 +71,33 @@
                     },
                     "409": {
                         "description": "Conflito - Já existe um anime com o mesmo título"
+                    }
+                }
+            }
+        },
+        "/api/v1/anime/{title}": {
+            "get": {
+                "tags": [
+                    "Animes"
+                ],
+                "summary": "Obter informações sobre um anime por título",
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "path",
+                        "description": "Título do anime desejado",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Informações sobre o anime"
+                    },
+                    "404": {
+                        "description": "Anime não encontrado"
                     }
                 }
             }
